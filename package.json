@@ -1,0 +1,35 @@
+{
+  "name": "sparacash-discord-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Skuffies/sparacash-discord-bot.git"
+  },
+  "keywords": [],
+  "author": "Skuffies",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Skuffies/sparacash-discord-bot/issues"
+  },
+  "homepage": "https://github.com/Skuffies/sparacash-discord-bot#readme",
+  "dependencies": {
+    "@discordjs/builders": "^1.3.0",
+    "@discordjs/rest": "^1.3.0",
+    "avanza": "^3.0.0",
+    "axios": "^1.2.1",
+    "discord-api-types": "^0.37.17",
+    "discord.js": "^14.6.0",
+    "dotenv": "^16.0.3",
+    "mysql2": "^2.3.3",
+    "puppeteer": "^19.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
