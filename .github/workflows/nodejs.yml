@@ -21,5 +21,11 @@ jobs:
         pm2 stop 0
         pm2 start 0
         pm2 save
+      env:
+        TOKEN: ${{secrets.TOKEN}}
+        CLIENT_ID: ${{secrets.CLIENT_ID}}
+        GUILD_ID: ${{secrets.GUILD_ID}}
+        STATUS: ${{secrets.STATUS}}
+        
           
           
