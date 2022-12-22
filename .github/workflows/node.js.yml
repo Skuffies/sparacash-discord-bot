@@ -10,7 +10,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  start:
 
     runs-on: self-hosted
 
@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: npm run build --if-present
+    - run: npm run start --if-present
       env:
         TOKEN: ${{secrets.TOKEN}}
         CLIENT_ID: ${{secrets.CLIENT_ID}}
