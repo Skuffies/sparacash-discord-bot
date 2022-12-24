@@ -11,12 +11,27 @@ module.exports = {
 
         await interaction.deferReply();
 
-        const browser = await puppeteer.launch({
-            defaultViewport: {
-                height: 1080,
-                width: 1920,
-            }
-        });
+        let browser;
+
+        try {
+            // Windows 10
+            browser = await puppeteer.launch({
+                defaultViewport: {
+                    height: 1080,
+                    width: 1920,
+                }
+            });
+        }catch(err) {
+            // Linux/ARM
+            browser = await puppeteer.launch({
+                defaultViewport: {
+                    height: 1080,
+                    width: 1920,
+                    executablePath: '/usr/bin/chromium-browser',
+                }
+            });
+        }
+        
         const page = await browser.newPage();
 
         await page.goto('https://www.avanza.se/index/om-indexet.html/18988/omx-stockholm-pi');
