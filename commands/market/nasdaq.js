@@ -1,6 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
 
+
+const os = require('os');
 const puppeteer = require('puppeteer');
 
 module.exports = {
@@ -13,23 +15,22 @@ module.exports = {
 
         let browser;
 
-        try {
-            // Windows 10
+        if (os.arch() === 'arm') {
             browser = await puppeteer.launch({
                 defaultViewport: {
                     height: 1080,
                     width: 1920,
-                }
-            });
-        }catch(err) {
-            // Linux/ARM
+                },
+                executablePath: '/usr/bin/chromium-browser',
+                args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+        } else {
             browser = await puppeteer.launch({
                 defaultViewport: {
                     height: 1080,
                     width: 1920,
-                    executablePath: '/usr/bin/chromium-browser',
-                }
-            });
+                },
+        });
         }
 
         const page = await browser.newPage();

@@ -1,4 +1,9 @@
-require('dotenv').config({ path: '../.env' });
+const os = require('os');
+if (os.arch() === 'arm') {
+    require('dotenv').config({ path: '../.env' });
+} else {
+    require('dotenv').config();
+}
 
 const { TOKEN } = process.env;
 const { Client } = require('discord.js');
