@@ -1,7 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
 
-
 const os = require('os');
 const puppeteer = require('puppeteer');
 
