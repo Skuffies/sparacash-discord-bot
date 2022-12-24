@@ -15,16 +15,16 @@ module.exports = {
 
         ( async () => {
             try {
-                if (STATUS === 'DEVELOPMENT') {
-                    await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
-                        body: commands,
-                    });
-                    console.log(`Registrerade ${commands.length} kommandon lokalt.`);
-                } else {
+                if (STATUS === 'PRODUCTION') {
                     await rest.put(Routes.applicationCommands(CLIENT_ID), {
                         body: commands,
                     });
                     console.log(`Registrerade ${commands.length} kommandon globalt.`);
+                } else {
+                    await rest.put(Routes.applicationGuildCommands(CLIENT_ID, GUILD_ID), {
+                        body: commands,
+                    });
+                    console.log(`Registrerade ${commands.length} kommandon lokalt.`);
                 }
             } catch (error) {
                 if (error) console.error(error);
