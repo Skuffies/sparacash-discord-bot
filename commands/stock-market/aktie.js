@@ -17,6 +17,7 @@ module.exports = {
             const stock = interaction.options.getString('namn');
 
             axios.get(`https://www.avanza.se/_mobile/market/search?query=${stock}`).then(res => {
+
                 let stockName = res['data']['hits'][0]['topHits'][0]['name'].toString();
                 let stockPrice = res['data']['hits'][0]['topHits'][0]['lastPrice'].toString();
                 let stockCurrency = res['data']['hits'][0]['topHits'][0]['currency'].toString();
@@ -44,8 +45,7 @@ module.exports = {
                     embeds: [infoEmbed]
                 });
 
-            }).catch(err => {
-                console.error(err);
+            }).catch(error => {
 
                 interaction.reply({
                     content: 'Kunde inte hitta aktien.'
