@@ -12,7 +12,8 @@ const client = new Client({
     intents: [
         'Guilds',
         'GuildMessages',
-        'MessageContent'
+        'MessageContent',
+        'GuildMembers'
     ]
 });
 

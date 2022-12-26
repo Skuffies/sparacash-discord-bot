@@ -11,15 +11,14 @@ module.exports = {
             const configFile = JSON.parse(fs.readFileSync('config.json', 'utf-8'));
 
             let link = configFile['aktiekampen']['link'];
-            let date = configFile['aktiekampen']['date'];
 
-            const aktiekampenEmbed = new EmbedBuilder()
+            const embed = new EmbedBuilder()
             .setColor('#2fd8eb')
 		    .setTitle('Aktiekampen')
-            .setDescription(`Länk: ${link}\nSlutdatum: ${date}`)
+            .setDescription(`Länk: ${link}`)
 
             interaction.reply({
-                embeds: [aktiekampenEmbed]
+                embeds: [embed]
             });
         }
 }

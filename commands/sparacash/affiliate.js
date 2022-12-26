@@ -5,8 +5,9 @@ module.exports ={
     data: new SlashCommandBuilder()
         .setName('affiliate')
 		.setDescription('SparaCashs affiliate länkar.'),
-    async execute(interaction){;
-		const affiliateEmbed = new EmbedBuilder()
+    async execute(interaction){
+
+		const embed = new EmbedBuilder()
 		.setColor('#2fd8eb')
 		.setTitle('Affiliate länkar')
 		.setDescription('Affiliate länkar du kan använda för att få gratis\n förmåner medans du samtidigt stöttar\nMarcus och SparaCash.')
@@ -21,8 +22,8 @@ module.exports ={
 		{ name: 'Rocker Bankkort (få 500 kr)', value: '[Länk](https://track.adtraction.com/t/t?a=1697258929&as=1165593249&t=2&tk=1&epi=discord)', inline: true},
 		{ name: 'TradingView - 30 dagar FREE TRIAL (Bäst för Teknisk Analys)', value: '[Länk](https://www.tradingview.com/?offer_id=10&aff_id=26280)', inline: true},
 		{ name: 'Binance: Köp kryptovalutor till LÄGST AVGIFTER', value: '[Länk](https://accounts.binance.me/en/register?ref=18075503)', inline: true},
-			)
+		)
 
-		interaction.channel.send({ embeds: [affiliateEmbed] });
+		interaction.channel.send({ embeds: [embed] });
     }
 }

@@ -3,8 +3,15 @@ module.exports = {
     async execute(message) {
         if(message.author.bot) return
 
-        if (message.content.toLowerCase().includes('botjävel')) {
-			message.reply('Så får man inte säga, jag gör mitt bästa!')
-		}
+        switch (message.content.toLowerCase().includes()) {
+
+            case 'botjävel':
+                message.reply('Så får man inte säga, jag gör mitt bästa!')
+                break;
+
+            case 'grabify':
+                message.delete();
+                break;
+        }
     }
 }

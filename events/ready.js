@@ -1,4 +1,4 @@
-const  { TOKEN, CLIENT_ID, GUILD_ID, STATUS } = process.env;
+const { TOKEN, CLIENT_ID, GUILD_ID, STATUS } = process.env;
 
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');

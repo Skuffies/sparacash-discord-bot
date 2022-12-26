@@ -1,42 +1,62 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const fs = require('fs');
+const { PermissionFlagsBits } = require('discord-api-types/v10');
 
+const fs = require('fs');
 const file = require('../../config.json');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('config')
         .setDescription('Konfigurera olika delar av SparaCash botten.')
+        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
         .addSubcommand(subCommand =>
             subCommand
             .setName('aktiekampen')
-            .setDescription('Ändra länken och datumet för aktiekampen.')
+            .setDescription('Ändra länken för aktiekampen.')
             .addStringOption(option =>
                 option
                 .setName('länk')
                 .setDescription('Länken till aktiekampen.')
                 .setRequired(true)
-                )
+                ))
+        .addSubcommand(subCommand =>
+            subCommand
+            .setName('lönekampen')
+            .setDescription('Ändra länken för lönekampen.')
             .addStringOption(option =>
                 option
-                .setName('datum')
-                .setDescription('Datumet när aktiekampen slutar.')
+                .setName('länk')
+                .setDescription('Länken till lönekampen.')
                 .setRequired(true)
-                )
-            ),
+                )),
         async execute(interaction) {
 
-            const link = interaction.options.getString('link');
-            const date = interaction.options.getString('date');
+            let link;
 
-            file['aktiekampen']['link'] = link;
-            file['aktiekampen']['date'] = date;
+            switch(interaction.commandName) {
+                case 'aktiekampen':
+                    link = interaction.options.getString('länk');
 
-            fs.writeFileSync('config.json', JSON.stringify(file, null, 2), (error) => {
-                console.error(error);
-            })
+                    file['aktiekampen']['link'] = link;
+        
+                    fs.writeFileSync('config.json', JSON.stringify(file, null, 2), (error) => {
+                        console.error(error);
+                    })
+        
+                    interaction.reply({content: 'Uppdaterade konfigurationen'});
+                    break;
 
-            interaction.reply({content: 'Uppdaterade konfigurationen'})
+                case 'lönekampen':
+                    link = interaction.options.getString('länk');
 
+                    file['aktiekampen']['link'] = link;
+        
+                    fs.writeFileSync('config.json', JSON.stringify(file, null, 2), (error) => {
+                        console.error(error);
+                    })
+        
+                    interaction.reply({content: 'Uppdaterade konfigurationen'});
+                    break;
+            }
         }
 }

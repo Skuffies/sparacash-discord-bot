@@ -14,9 +14,6 @@ module.exports = {
             .setMaxLength(2000)
         ),
     async execute(interaction){
-		if(!interaction.member.roles.cache.has('1048938852947079218')) {
-            return interaction.reply('Du har inte tillgång till det här kommandot.');
-        };
 
         const copycatMessage = interaction.options.getString('meddelande');
 
