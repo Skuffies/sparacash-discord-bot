@@ -59,5 +59,7 @@ module.exports = {
                     break;
             }
 
+            interaction.reply({embeds: [embed]});
+
         }
 }
