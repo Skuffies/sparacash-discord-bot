@@ -17,6 +17,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Restart pm2 process
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
     - run:
         npm i
         pm2 stop 0
