@@ -1,4 +1,4 @@
-const { COUNT_CHANNEL_ID } = process.env;
+const { COUNT_CHANNEL } = process.env;
 
 module.exports = {
     name: "guildMemberRemove",
@@ -7,7 +7,7 @@ module.exports = {
         let memberCount = member.guild.memberCount;
 
         try {
-            let memberChannel = member.guild.channels.cache.find(channel => channel.id === COUNT_CHANNEL_ID);
+            let memberChannel = member.guild.channels.cache.find(channel => channel.id === COUNT_CHANNEL);
             memberChannel.setName(`Medlemmar: ${memberCount.toLocaleString()}`);
         } catch (err) {
             console.error(err);

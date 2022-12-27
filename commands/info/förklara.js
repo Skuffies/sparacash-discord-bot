@@ -16,6 +16,9 @@ module.exports = {
                     {name: 'K4-Blanketten', value: 'k4'},
                     {name: 'Skatt mellan ISK/KF', value: 'isk/kf'},
                     {name: 'Ränta på ränta', value: 'rpr'},
+                    {name: 'ISK eller AF', value: 'iskelleraf'},
+                    {name: 'SparaCash', value: 'sparacash'},
+                    {name: 'Index', value: 'index'},
                 )
             ),
         async execute(interaction) {
@@ -56,6 +59,27 @@ module.exports = {
                     .setColor('#2fd8eb')
                     .setTitle('Ränta på ränta')
                     .setDescription('Det enklaste sättet att förklara detta är med ett exempel. Låt oss säga att du har 100 kr på ditt investeringskonto och att dina pengar ökar med 10% (avkastning/ränta). \nI slutet av året skulle du ha tjänat 10 kr i ränta (eller kapitalet ökat med 10% - dvs 10 kr avkastning). \nÅr 2 så är ditt konto nu värt 110 kr. Så om du får samma ränta eller avkastning på 10% så kommer dina pengar nu istället öka med 11 kr i värde (10% avkastning på 110 kr blir 11 kr) i slutet av år två. \nDina pengar är nu alltså värda 121 kr.\nhttps://sparacash.se/rantekalkylatorn/');
+                    break;
+
+                case 'iskelleraf':
+                    embed = new EmbedBuilder()
+                    .setColor('#2fd8eb')
+                    .setTitle('ISK eller AF')
+                    .setDescription('Den största skillnaden på ISK och AF är att på en AF behöver du rapportera in den handel du gjort med dina aktier till Skatteverket, medans på ett ISK behöver du inte rapportera in någonting. En annan viktig skillnad mellan ISK och AF är också att du betalar en låg skatt varje år på ISK medans på ett AF betalar du 30% skatt på din vinst. \n**När är AF bättre än ISK?** \nOm du fått en avkastning som överträffar skatten på ISK så är det alltid att föredra att ha en ISK framför en AF. En bra tumregel är att ifall du förväntar dig att göra mer än 2% avkastning per år så bör du ha en ISK istället för en AF.\nLäs mer här: [Länk](https://sparacash.se/isk-af-kf/#skillnad-isk-af)');
+                    break;
+                    
+                case 'sparacash':
+                    embed = new EmbedBuilder()
+                    .setColor('#2fd8eb')
+                    .setTitle('SparaCash')
+                    .setDescription('SparaCash är en oberoende hemsida där målet är att få nybörjare att börja spara pengar i aktier och fonder. Idén med SparaCash är att lära ut kunskapen om aktier och fonder till nybörjare på ett enkelt och lättläst sätt. Det är oftast så att personer undviker att börja investera sina pengar därför att informationen om aktier & fonder är inlåst bakom betalväggar eller onödigt komplicerad. Detta leder till att man som nybörjare gör stora misstag på börsen eller undviker helt att börja investera pengar och går miste om mycket avkastning under sitt liv. \n Här kan du kolla in SparaCash hemsidan [Länk](https://sparacash.se/)');
+                    break;
+
+                case 'index':
+                    embed = new EmbedBuilder()
+                    .setColor('#2fd8eb')
+                    .setTitle('Index')
+                    .setDescription('Ett index är ett snitt som visar hur det har gått för ett visst antal aktier. Exempelvis OMXS30 som är ett index över hur det har gått för de 30 mest omsatta aktiebolagen på Stockholmsbörsen (Large, Mid och Small Cap) under en viss tidsperiod. \nLäs mer här: [Länk](https://sparacash.se/indexfonder/#vadarettindex)');
                     break;
             }
 

@@ -3,15 +3,10 @@ module.exports = {
     async execute(message) {
         if(message.author.bot) return
 
-        switch (message.content.toLowerCase().includes()) {
-
-            case 'botjävel':
-                message.reply('Så får man inte säga, jag gör mitt bästa!')
-                break;
-
-            case 'grabify':
-                message.delete();
-                break;
+        if (message.content.toLowerCase().includes('botjävel')) {
+            message.reply('Så får man inte säga, jag gör mitt bästa!')
+        } else if (message.content.toLowerCase().includes(`<@${message.client.user.id}`)) {
+            message.reply('Skriv i kanalen respektiv för ditt ämne för att få svar på dina frågor.')
         }
     }
 }

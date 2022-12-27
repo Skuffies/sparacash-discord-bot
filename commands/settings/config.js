@@ -11,16 +11,6 @@ module.exports = {
         .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
         .addSubcommand(subCommand =>
             subCommand
-            .setName('aktiekampen')
-            .setDescription('Ändra länken för aktiekampen.')
-            .addStringOption(option =>
-                option
-                .setName('länk')
-                .setDescription('Länken till aktiekampen.')
-                .setRequired(true)
-                ))
-        .addSubcommand(subCommand =>
-            subCommand
             .setName('lönekampen')
             .setDescription('Ändra länken för lönekampen.')
             .addStringOption(option =>
@@ -33,29 +23,17 @@ module.exports = {
 
             let link;
 
-            switch(interaction.commandName) {
-                case 'aktiekampen':
-                    link = interaction.options.getString('länk');
-
-                    file['aktiekampen']['link'] = link;
-        
-                    fs.writeFileSync('config.json', JSON.stringify(file, null, 2), (error) => {
-                        console.error(error);
-                    })
-        
-                    interaction.reply({content: 'Uppdaterade konfigurationen'});
-                    break;
-
+            switch(interaction.options.getSubcommand()) {
                 case 'lönekampen':
                     link = interaction.options.getString('länk');
 
-                    file['aktiekampen']['link'] = link;
+                    file['lönekampen']['link'] = link;
         
                     fs.writeFileSync('config.json', JSON.stringify(file, null, 2), (error) => {
                         console.error(error);
                     })
         
-                    interaction.reply({content: 'Uppdaterade konfigurationen'});
+                    interaction.reply({content: 'Uppdaterade konfigurationen för lönekampen.'});
                     break;
             }
         }
