@@ -18,5 +18,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run:
         npm i
-        pm2 restart
+        pm2 stop 0
+        pm2 start 0
         pm2 save
