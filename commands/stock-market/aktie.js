@@ -40,7 +40,7 @@ module.exports = {
                     {name: 'Procentuell förändring', value: `${stockPercent}%`},
                     {name: 'Pris', value: `${stockPrice} ${stockCurrency}`},
                     {name: 'Landskod', value: stockCountry},
-                    {name: 'URL', value: `https://www.avanza.se/aktier/om-aktien.html/${stockId}/${stockName.replace(' ', '-')}`},
+                    {name: 'Länk', value: `https://www.avanza.se/aktier/om-aktien.html/${stockId}/${stockName.replace(' ', '-')}`},
                 )
 
                 interaction.reply({
