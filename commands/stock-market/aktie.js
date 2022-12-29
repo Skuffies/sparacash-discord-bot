@@ -40,7 +40,7 @@ module.exports = {
                     {name: 'Procentuell förändring', value: `${stockPercent}%`},
                     {name: 'Pris', value: `${stockPrice} ${stockCurrency}`},
                     {name: 'Landskod', value: stockCountry},
-                    {name: 'Länk', value: `[${stockName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/aktier/om-aktien.html/${stockId}/${stockName.replace(' ', '-')})`},
+                    {name: 'Länk', value: `[${stockName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/aktier/om-aktien.html/${stockId}/${stockName.replaceAll(' ', '-')})`},
                 )
 
                 interaction.reply({
