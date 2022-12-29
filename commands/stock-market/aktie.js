@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, ALLOWED_STICKER_EXTENSIONS } = require('discord.js');
 
 const axios = require('axios');
 
@@ -23,6 +23,7 @@ module.exports = {
                 let stockCurrency = res['data']['hits'][0]['topHits'][0]['currency'].toString();
                 let stockPercent = res['data']['hits'][0]['topHits'][0]['changePercent'].toString();
                 let stockCountry = res['data']['hits'][0]['topHits'][0]['flagCode'].toString();
+                let stockId = res['data']['hits'][0]['topHits'][0]['id'].toString();
 
                 if (!stockPercent.includes('-')) {
                     stockPercent = `+${stockPercent}`
@@ -39,6 +40,7 @@ module.exports = {
                     {name: 'Procentuell förändring', value: `${stockPercent}%`},
                     {name: 'Pris', value: `${stockPrice} ${stockCurrency}`},
                     {name: 'Landskod', value: stockCountry},
+                    {name: 'URL', value: `https://www.avanza.se/aktier/om-aktien.html/${stockId}/${stockName.replace(' ', '-')}`},
                 )
 
                 interaction.reply({
