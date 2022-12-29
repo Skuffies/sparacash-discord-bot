@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, ALLOWED_STICKER_EXTENSIONS } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
 const axios = require('axios');
 
@@ -48,7 +48,6 @@ module.exports = {
                 });
 
             }).catch(error => {
-
                 interaction.reply({
                     content: 'Kunde inte hitta aktien.'
                 });
