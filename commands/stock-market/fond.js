@@ -53,7 +53,7 @@ module.exports = {
                     {name: '\u200b\n3 Mån', value: `${fundPercent3Months}%`, inline: true},
                     {name: '\u200b\n1 År', value: `${fundPercent1Year}%`, inline: true},
                     {name: 'Risk', value: `${fundRiskLevel.slice(0, 1)}${fundRiskLevel.slice(1).toLowerCase()} ${fundRisk}`},
-                    {name: 'Länk', value: `[${fundName} på Avanza](https://www.avanza.se/fonder/om-fonden.html/${fundId}/${fundName.replaceAll(' ', '-')})`},
+                    {name: 'Länk', value: `[${fundName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/fonder/om-fonden.html/${fundId}/${fundName.replaceAll(' ', '-')})`},
                 )
 
                 interaction.reply({
