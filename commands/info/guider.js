@@ -1,4 +1,5 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -17,32 +18,25 @@ module.exports = {
             ),
         async execute(interaction) {
             
-            let embed;
+            let text;
 
             switch(interaction.options.getString('guide')) {
                 case 'courtage':
-                    embed = new EmbedBuilder()
-                    .setColor('#2fd8eb')
-                    .setTitle('Courtage')
-                    .setDescription('https://sparacash.se/courtage')
+                    text = 'https://sparacash.se/courtage';
                     break;
 
                 case 'binance':
-                    embed = new EmbedBuilder()
-                    .setColor('#2fd8eb')
-                    .setTitle('Binance')
-                    .setDescription('https://sparacash.se/ta-ut-pengar-fran-binance/')
+                    text = 'https://sparacash.se/ta-ut-pengar-fran-binance/';
                     break;
 
                 case 'portfölj':
-                    embed = new EmbedBuilder()
-                    .setColor('#2fd8eb')
-                    .setTitle('Portfölj')
-                    .setDescription('https://sparacash.se/mina-investeringar')
+                    text = 'https://sparacash.se/mina-investeringar';
                     break;
             }
 
-            interaction.reply({embeds: [embed]});
+            interaction.reply({
+                content: text
+            });
 
         }
 }
