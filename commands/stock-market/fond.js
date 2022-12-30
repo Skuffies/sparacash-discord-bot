@@ -30,6 +30,7 @@ module.exports = {
                 let fundPercent1Year = res['data']['hits'][indexNumber]['topHits'][0]['changeSinceOneYear'].toString();
                 let fundRiskLevel = res['data']['hits'][indexNumber]['topHits'][0]['riskLevel'].toString();
                 let fundRisk = res['data']['hits'][indexNumber]['topHits'][0]['risk'].toString();
+                let fundFee = res['data']['hits'][indexNumber]['topHits'][0]['managementFee'].toString();
                 let fundId = res['data']['hits'][indexNumber]['topHits'][0]['id'].toString();
 
                 if (!fundPercent1Day.includes('-')) {
@@ -48,10 +49,10 @@ module.exports = {
                 })
                 .addFields(
                     {name: 'Namn', value: fundName},
-                    {name: 'Procentuell förändring', value: '\u200b'},
-                    {name: '\u200b\n1 Dag', value: `${fundPercent1Day}%`, inline: true},
-                    {name: '\u200b\n3 Mån', value: `${fundPercent3Months}%`, inline: true},
-                    {name: '\u200b\n1 År', value: `${fundPercent1Year}%`, inline: true},
+                    {name: '1 Dag', value: `${fundPercent1Day}%`, inline: true},
+                    {name: '3 Mån', value: `${fundPercent3Months}%`, inline: true},
+                    {name: '1 År', value: `${fundPercent1Year}%`, inline: true},
+                    {name: 'Förvaltningsavgift', value: `${fundFee}%`},
                     {name: 'Risk', value: `${fundRiskLevel.slice(0, 1)}${fundRiskLevel.slice(1).toLowerCase()} ${fundRisk}`},
                     {name: 'Länk', value: `[${fundName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/fonder/om-fonden.html/${fundId}/${fundName.replaceAll(' ', '-')})`},
                 )
