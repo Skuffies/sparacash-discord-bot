@@ -40,7 +40,7 @@ module.exports = {
                     {name: 'Procentuell förändring', value: `${exchange_traded_fundPercent}%`},
                     {name: 'Pris', value: `${exchange_traded_fundPrice} ${exchange_traded_fundCurrency}`},
                     {name: 'Landskod', value: exchange_traded_fundCountry},
-                    {name: 'Länk', value: `[${exchange_traded_fundName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/aktier/om-aktien.html/${exchange_traded_fundId}/${exchange_traded_fundName.replaceAll(' ', '-')})`},
+                    {name: 'Länk', value: `[${exchange_traded_fundName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/borshandlade-produkter/etf-torg/om-fonden.html/${exchange_traded_fundId}/${exchange_traded_fundName.replaceAll(' ', '-')})`},
                 )
 
                 interaction.reply({
