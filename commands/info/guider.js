@@ -25,6 +25,11 @@ module.exports = {
                     { name: 'Bästa aktierna för nybörjare', value: 'bästa-aktierna' },
                     { name: 'Investera 10 000kr', value: 'investera10000' },
                     { name: 'Binance Card', value: 'binance-card' },
+                    { name: 'Köpa Binance Coin', value: 'köpa-binance-coin' },
+                    { name: 'Vad är aktier?', value: 'vad-är-aktier' },
+                    { name: 'Lysa vs OPTI', value: 'lysa-vs-opti' },
+                    { name: 'Rocker kort - Mitt omdömme', value: 'rocker-omdömme' },
+                    { name: 'Bästa kreditkortet', value: 'bästa-kreditkortet' },
                     
                 )
             ),
@@ -36,64 +41,63 @@ module.exports = {
                 case 'courtage':
                     text = 'https://sparacash.se/courtage';
                     break;
-
                 case 'binance':
                     text = 'https://sparacash.se/ta-ut-pengar-fran-binance/';
                     break;
-
                 case 'portfölj':
                     text = 'https://sparacash.se/mina-investeringar';
-                    break;
-                
+                    break;        
                 case 'kf':
                     text = 'https://sparacash.se/kapitalforsakring-nackdelar/';
-                    break;
-                
+                    break;                
                 case 'iskskatt':
                     text = 'https://sparacash.se/isk-skatt/';
-                    break;
-                
+                    break;                
                 case 'bästa-sparandet':
                     text = 'https://sparacash.se/basta-sparandet/';
-                    break;
-                
+                    break;               
                 case 'livestream':
                     text = 'https://sparacash.se/livestream-om-aktier-fonder/';
-                    break;
-                
+                    break;                
                 case 'minderårig':
                     text = 'https://sparacash.se/under-18/';
-                    break;
-                
+                    break;               
                 case 'remember-flex':
                     text = 'https://sparacash.se/remember-flex/';
-                    break;
-                
+                    break;               
                 case 'bästa-fonderna':
                     text = 'https://sparacash.se/basta-fonderna/';
-                    break;
-                
+                    break;              
                 case 'stop-loss':
                     text = 'https://sparacash.se/stop-loss/';
-                    break;
-                
+                    break;               
                 case 'aktiekampen':
                     text = 'https://sparacash.se/aktiekampen/';
-                    break;
-                
+                    break;                
                 case 'bästa-aktierna':
                     text = 'https://sparacash.se/basta-aktierna-for-nyborjare/';
-                    break;
-                
+                    break;              
                 case 'investera10000':
                     text = 'https://sparacash.se/investera-10-000-kr/';
-                    break;
-                
+                    break;               
                 case 'binance-card':
                     text = 'https://sparacash.se/binance-card/';
                     break;
-
-                
+                case 'köpa-binance-coin':
+                    text = 'https://sparacash.se/kopa-binance-coin/';
+                    break;
+                case 'vad-är-en-aktier':
+                    text = 'https://sparacash.se/vad-ar-aktier/';
+                    break;
+                case 'lysa-vs-opti':
+                    text = 'https://sparacash.se/lysa-vs-opti/';
+                    break;
+                case 'rocker-omdömme':
+                    text = 'https://sparacash.se/rocker/';
+                    break;
+                case 'bästa-kreditkortet':
+                    text = 'https://sparacash.se/basta-kreditkortet/';
+                    break;
                 
             }
 
