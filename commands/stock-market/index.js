@@ -1,8 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder } = require('discord.js');
-
+ 
 const axios = require('axios');
-
+ 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('index')
@@ -38,6 +38,7 @@ module.exports = {
                 const infoEmbed = new EmbedBuilder()
                 .setColor('#2fd8eb')
                 .setTitle('index information')
+                .setTitle('index information')
                 .setFooter({
                     text: '*Upp till 15 min fördröjning*'
                 })
@@ -55,7 +56,7 @@ module.exports = {
 
             }).catch(error => {
                 interaction.reply({
-                    content: 'Kunde inte hitta aktien.'
+                    content: 'Kunde inte hitta indexet.'
                 });
             });
     }
