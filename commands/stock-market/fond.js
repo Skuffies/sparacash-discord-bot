@@ -63,7 +63,7 @@ module.exports = {
 
             }).catch(error => {
                 interaction.reply({
-                    content: 'Kunde inte hitta aktien.'
+                    content: 'Kunde inte hitta fonden.'
                 });
             });
     }
