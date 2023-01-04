@@ -14,7 +14,7 @@ module.exports = {
                     {name: 'A & B aktier.', value: 'ab'},
                     {name: 'Aktier som minderårig', value: 'minderårig'},
                     {name: 'K4-Blanketten', value: 'k4'},
-                    {name: 'Skatt mellan ISK/KF', value: 'isk/kf'},
+                    {name: 'Skatt på ISK/KF', value: 'isk/kf'},
                     {name: 'Ränta på ränta', value: 'rpr'},
                     {name: 'ISK eller AF', value: 'iskelleraf'},
                     {name: 'SparaCash', value: 'sparacash'},
@@ -50,7 +50,7 @@ module.exports = {
                 case 'isk/kf':
                     embed = new EmbedBuilder()
                     .setColor('#2fd8eb')
-                    .setTitle('Skatt mellan ISK/KF')
+                    .setTitle('Skatt på ISK/KF')
                     .setDescription('När du gör insättningar på isk och kf så höjer du skatteunderlaget. Men när du tar ut pengar så tas detta inte hänsyn till förutom vid den kvartalvisa kontrollen för ditt värde.');
                     break;
 

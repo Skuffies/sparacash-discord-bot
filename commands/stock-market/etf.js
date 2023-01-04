@@ -14,16 +14,22 @@ module.exports = {
             .setRequired(true)
             ),
         async execute(interaction) {
+
             const etf = interaction.options.getString('namn');
+            let indexNumber = 0;
 
             axios.get(`https://www.avanza.se/_mobile/market/search?query=${etf}`).then(res => {
 
-                let exchange_traded_fundName = res['data']['hits'][0]['topHits'][0]['name'].toString();
-                let exchange_traded_fundPrice = res['data']['hits'][0]['topHits'][0]['lastPrice'].toString();
-                let exchange_traded_fundCurrency = res['data']['hits'][0]['topHits'][0]['currency'].toString();
-                let exchange_traded_fundPercent = res['data']['hits'][0]['topHits'][0]['changePercent'].toString();
-                let exchange_traded_fundCountry = res['data']['hits'][0]['topHits'][0]['flagCode'].toString();
-                let exchange_traded_fundId = res['data']['hits'][0]['topHits'][0]['id'].toString();
+                while (res['data']['hits'][indexNumber]['instrumentType'] !== 'EXCHANGE_TRADED_FUND') {
+                    indexNumber++;
+                }
+
+                let exchange_traded_fundName = res['data']['hits'][indexNumber]['topHits'][0]['name'].toString();
+                let exchange_traded_fundPrice = res['data']['hits'][indexNumber]['topHits'][0]['lastPrice'].toString();
+                let exchange_traded_fundCurrency = res['data']['hits'][indexNumber]['topHits'][0]['currency'].toString();
+                let exchange_traded_fundPercent = res['data']['hits'][indexNumber]['topHits'][0]['changePercent'].toString();
+                let exchange_traded_fundCountry = res['data']['hits'][indexNumber]['topHits'][0]['flagCode'].toString();
+                let exchange_traded_fundId = res['data']['hits'][indexNumber]['topHits'][0]['id'].toString();
 
                 if (!exchange_traded_fundPercent.includes('-')) {
                     exchange_traded_fundPercent = `+${exchange_traded_fundPercent}`
@@ -49,9 +55,8 @@ module.exports = {
 
             }).catch(error => {
                 interaction.reply({
-                    content: 'Kunde inte hitta ETFn'
+                    content: 'Kunde inte hitta aktien.'
                 });
-
             });
     }
 }

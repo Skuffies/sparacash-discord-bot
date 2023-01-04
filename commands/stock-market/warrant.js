@@ -14,16 +14,22 @@ module.exports = {
             .setRequired(true)
             ),
         async execute(interaction) {
+
             const warrant = interaction.options.getString('namn');
+            let indexNumber = 0;
 
             axios.get(`https://www.avanza.se/_mobile/market/search?query=${warrant}`).then(res => {
 
-                let warrantName = res['data']['hits'][0]['topHits'][0]['name'].toString();
-                let warrantPrice = res['data']['hits'][0]['topHits'][0]['lastPrice'].toString();
-                let warrantCurrency = res['data']['hits'][0]['topHits'][0]['currency'].toString();
-                let warrantPercent = res['data']['hits'][0]['topHits'][0]['changePercent'].toString();
-                let warrantCountry = res['data']['hits'][0]['topHits'][0]['flagCode'].toString();
-                let warrantId = res['data']['hits'][0]['topHits'][0]['id'].toString();
+                while (res['data']['hits'][indexNumber]['instrumentType'] !== 'WARRANT') {
+                    indexNumber++;
+                }
+
+                let warrantName = res['data']['hits'][indexNumber]['topHits'][0]['name'].toString();
+                let warrantPrice = res['data']['hits'][indexNumber]['topHits'][0]['lastPrice'].toString();
+                let warrantCurrency = res['data']['hits'][indexNumber]['topHits'][0]['currency'].toString();
+                let warrantPercent = res['data']['hits'][indexNumber]['topHits'][0]['changePercent'].toString();
+                let warrantCountry = res['data']['hits'][indexNumber]['topHits'][0]['flagCode'].toString();
+                let warrantId = res['data']['hits'][indexNumber]['topHits'][0]['id'].toString();
 
                 if (!warrantPercent.includes('-')) {
                     warrantPercent = `+${warrantPercent}`
@@ -49,9 +55,8 @@ module.exports = {
 
             }).catch(error => {
                 interaction.reply({
-                    content: 'Kunde inte hitta warranten.'
+                    content: 'Kunde inte hitta aktien.'
                 });
-
             });
     }
 }

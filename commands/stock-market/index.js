@@ -1,96 +1,62 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 
-const os = require('os');
-const puppeteer = require('puppeteer');
+const axios = require('axios');
 
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('index')
-        .setDescription('Information om olika index.')
+        .setDescription('Hitta information om ett index.')
         .addStringOption(option =>
             option
             .setName('namn')
-            .setDescription('Namnet på indexet.')
-            .addChoices(
-                {name: 'Nasdaq', value: 'nasdaq'},
-                {name: 'Omxs30', value: 'omxs30'},
-                {name: 'Omxspi', value: 'omxspi'},
-            )
+            .setDescription('Namnet på indexet du vill hitta information om.')
             .setRequired(true)
             ),
         async execute(interaction) {
 
-            await interaction.deferReply();
+            const index = interaction.options.getString('namn');
+            let indexNumber = 0;
 
-            let url;
-            let browser;
+            axios.get(`https://www.avanza.se/_mobile/market/search?query=${index}`).then(res => {
 
-            switch (interaction.options.getString('namn')) {
-                case 'nasdaq':
-                    url = 'https://www.avanza.se/index/om-indexet.html/19006/nasdaq';
-                    break;
+                while (res['data']['hits'][indexNumber]['instrumentType'] !== 'INDEX') {
+                    indexNumber++;
+                }
 
-                case 'omxs30':
-                    url = 'https://www.avanza.se/index/om-indexet.html/19002/omx-stockholm-30'; 
-                    break;
+                let indexName = res['data']['hits'][indexNumber]['topHits'][0]['name'].toString();
+                let indexPrice = res['data']['hits'][indexNumber]['topHits'][0]['lastPrice'].toString();
+                let indexCurrency = res['data']['hits'][indexNumber]['topHits'][0]['currency'].toString();
+                let indexPercent = res['data']['hits'][indexNumber]['topHits'][0]['changePercent'].toString();
+                let indexCountry = res['data']['hits'][indexNumber]['topHits'][0]['flagCode'].toString();
+                let indexId = res['data']['hits'][indexNumber]['topHits'][0]['id'].toString();
 
-                case 'omxspi':
-                    url = 'https://www.avanza.se/index/om-indexet.html/18988/omx-stockholm-pi';
-                    break;
-            }
-    
-            if (os.arch() === 'arm') {
-                browser = await puppeteer.launch({
-                    defaultViewport: {
-                        height: 1080,
-                        width: 1920,
-                    },
-                    executablePath: '/usr/bin/chromium-browser',
-                    args: ['--no-sandbox', '--disable-setuid-sandbox']
-            });
-            } else {
-                browser = await puppeteer.launch({
-                    defaultViewport: {
-                        height: 1080,
-                        width: 1920,
-                    },
-            });
-            }
-            
-            const page = await browser.newPage();
-    
-            await page.goto(url);
-    
-            await page.waitForNavigation({waitUntil: 'networkidle0'});
-    
-            let graph = await page.screenshot({clip: {x: 374, y: 268, width: 770, height: 393}});
-            let price = await page.screenshot({clip: {x: 1160, y: 268, width: 385, height: 193}});
-    
-            await browser.close();
-    
-            const priceAttachment = new AttachmentBuilder(price, {name: 'price.png'});
-            const graphAttachment = new AttachmentBuilder(graph, {name: 'screenshot.png'});
-    
-            let priceEmbed = new EmbedBuilder()
+                if (!indexPercent.includes('-')) {
+                    indexPercent = `+${indexPercent}`
+                }
+
+                const infoEmbed = new EmbedBuilder()
                 .setColor('#2fd8eb')
-                .setTitle(`Pris: ${interaction.options.getString('namn').toUpperCase()}`)
-                .setDescription(`Den senaste dagens pris av ${interaction.options.getString('namn').toUpperCase()}`)
-                .setImage(`attachment://${priceAttachment.name}`)
+                .setTitle('index information')
                 .setFooter({
                     text: '*Upp till 15 min fördröjning*'
                 })
-    
-            let graphEmbed = new EmbedBuilder()
-                .setColor('#2fd8eb')
-                .setTitle(`Diagram: ${interaction.options.getString('namn').toUpperCase()}`)
-                .setDescription(`Den senaste dagens diagram av ${interaction.options.getString('namn').toUpperCase()}`)
-                .setImage(`attachment://${graphAttachment.name}`)
-                .setFooter({
-                    text: '*Upp till 15 min fördröjning*'
-                })
-    
-            interaction.editReply({embeds: [priceEmbed, graphEmbed], files: [graphAttachment, priceAttachment]});
+                .addFields(
+                    {name: 'Namn', value: indexName},
+                    {name: 'Procentuell förändring', value: `${indexPercent}%`},
+                    {name: 'Pris', value: `${indexPrice} ${indexCurrency}`},
+                    {name: 'Landskod', value: indexCountry},
+                    {name: 'Länk', value: `[${indexName} på Avanza](https://click.adrecord.com/?c=24113&p=836&epi=discord&url=https://www.avanza.se/indexr/om-indexn.html/${indexId}/${indexName.replaceAll(' ', '-')})`},
+                )
 
-        }
+                interaction.reply({
+                    embeds: [infoEmbed]
+                });
+
+            }).catch(error => {
+                interaction.reply({
+                    content: 'Kunde inte hitta aktien.'
+                });
+            });
+    }
 }

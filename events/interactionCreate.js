@@ -34,10 +34,16 @@ module.exports = {
         } catch (error) {
             if (error) console.error(error);
     
-            await interaction.reply({
-                content: 'Ett problem uppstod när kommandot utfördes!',
-                ephemeral: true
-            });
+            if (command === 'copycat') {
+                await interaction.reply({
+                    content: 'Ett problem uppstod när kommandot utfördes!',
+                    ephemeral: true,
+                });
+            } else {
+                await interaction.reply({
+                    content: 'Ett problem uppstod när kommandot utfördes!'
+                });
+            }
         }
     }
 }

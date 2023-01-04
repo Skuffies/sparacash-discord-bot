@@ -14,16 +14,22 @@ module.exports = {
             .setRequired(true)
             ),
         async execute(interaction) {
+
             const stock = interaction.options.getString('namn');
+            let indexNumber = 0;
 
             axios.get(`https://www.avanza.se/_mobile/market/search?query=${stock}`).then(res => {
 
-                let stockName = res['data']['hits'][0]['topHits'][0]['name'].toString();
-                let stockPrice = res['data']['hits'][0]['topHits'][0]['lastPrice'].toString();
-                let stockCurrency = res['data']['hits'][0]['topHits'][0]['currency'].toString();
-                let stockPercent = res['data']['hits'][0]['topHits'][0]['changePercent'].toString();
-                let stockCountry = res['data']['hits'][0]['topHits'][0]['flagCode'].toString();
-                let stockId = res['data']['hits'][0]['topHits'][0]['id'].toString();
+                while (res['data']['hits'][indexNumber]['instrumentType'] !== 'STOCK') {
+                    indexNumber++;
+                }
+
+                let stockName = res['data']['hits'][indexNumber]['topHits'][0]['name'].toString();
+                let stockPrice = res['data']['hits'][indexNumber]['topHits'][0]['lastPrice'].toString();
+                let stockCurrency = res['data']['hits'][indexNumber]['topHits'][0]['currency'].toString();
+                let stockPercent = res['data']['hits'][indexNumber]['topHits'][0]['changePercent'].toString();
+                let stockCountry = res['data']['hits'][indexNumber]['topHits'][0]['flagCode'].toString();
+                let stockId = res['data']['hits'][indexNumber]['topHits'][0]['id'].toString();
 
                 if (!stockPercent.includes('-')) {
                     stockPercent = `+${stockPercent}`
@@ -51,7 +57,6 @@ module.exports = {
                 interaction.reply({
                     content: 'Kunde inte hitta aktien.'
                 });
-
             });
     }
 }
